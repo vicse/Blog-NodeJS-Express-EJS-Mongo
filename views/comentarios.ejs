@@ -29,11 +29,24 @@
                 <form class="form-horizontal">
                     <input id="id" type="hidden" value="<%= id_noti %>"/>
                     <div class="form-group row"> 
+                      <label class="col-sm-2 control-label" for="inputAutor">Autor</label>
+                      <div class="col-sm-10">
+                          <input class="form-control" id="inputAutor" type="text" placeholder="Autor"/>
+                      </div>
+                  </div>
+                    <div class="form-group row"> 
                         <label class="col-sm-2 control-label" for="inputComentario">Comentario</label>
                         <div class="col-sm-10">
                             <input class="form-control" id="inputComentario" type="text" placeholder="Comentario"/>
                         </div>
                     </div>
+                    <div class="form-group row"> 
+                      <label class="col-sm-2 control-label" for="inputFecha">Fecha</label>
+                      <div class="col-sm-10">
+                          <input class="form-control" id="inputFecha" type="date" placeholder="Fecha"/>
+                      </div>
+                  </div>
+                    
                 </form>
             </div>
             <div class="modal-footer">
@@ -48,11 +61,12 @@
       <% lista.forEach((comentario) => { %>
         <div class="card">
             <div class="card-header">
-                <%= comentario.noticia %>
+                <%= comentario._id %>
             </div>
             <div class="card-body">
               <blockquote class="blockquote mb-0">
                 <p><%= comentario.comentario %></p>
+                <footer class="blockquote-footer"><%= comentario.autor  %> - <cite title="Source Title"><%= comentario.fecha %></cite></footer>
               </blockquote>
             </div>
         </div> 
@@ -72,7 +86,9 @@
 
     $('.btnGuardar').click( () => {
         datos = {            
+            autor : $('#inputAutor').val(),
             comentario : $('#inputComentario').val(),
+            fecha : $('#inputFecha').val(),
             noticia_id : noticia_id
         };
        
@@ -80,7 +96,9 @@
     
         console.log(datos);
         $.post(ruta , datos, (data) => {
-            $('#inputcomentario').val('');
+           $('#inputComentario').val('');
+            $('#inputFecha').val('');
+            $('#inputAutor').val('');
             $('#myModal').modal('hide');
             location.reload();
             // $('#dataTable').DataTable().ajax.reload();

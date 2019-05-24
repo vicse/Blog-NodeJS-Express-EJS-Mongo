@@ -4,7 +4,15 @@ let Schema = mongoose.Schema;
 
 let comentarioSchema = new Schema({
 
+    autor :{
+        type: String
+    },
+
     comentario : { 
+        type: String
+    },
+
+    fecha : {
         type: String
     },
 

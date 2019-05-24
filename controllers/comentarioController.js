@@ -76,7 +76,9 @@ module.exports = {
         let body = req.body;
 
         let obj = new Comentario({
+            autor : body.autor,
             comentario : body.comentario,
+            fecha : body.fecha,
             noticia : body.noticia_id
         });
 
