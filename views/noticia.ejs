@@ -97,6 +97,7 @@
         $.get('news/detalle/' + val_id, (data) => {
             $('#id').val(data._id);
             $('#inputTitulo').val(data.titulo);
+            $('#inputDescripcion').val(data.descripcion),
             $('#inputCategoria').val(data.categoria);
             $('#inputFecha').val(data.fecha);
             $('#myModal').modal('show');

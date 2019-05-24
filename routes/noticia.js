@@ -4,7 +4,7 @@ var controller = require('../controllers/noticiaController');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-    res.render('Noticia', function(err, html) {
+    res.render('noticia', function(err, html) {
         if (err) throw err;
         res.render('layouts/layout', {
             tituloSeccion: 'Noticia',

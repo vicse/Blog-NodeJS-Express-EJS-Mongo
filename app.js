@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/blog', { useNewUrlParser: true, useCreateIndex: true },
+mongoose.connect('mongodb://localhost/lab11', { useNewUrlParser: true, useCreateIndex: true },
     (err, res) => {
 
         if (err) throw err;
@@ -31,7 +31,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/static', express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/views/login.html');
@@ -42,7 +42,7 @@ app.use('/users', usersRouter);
 app.use('/admin', adminRouter);
 app.use('/producto', productoRouter);
 app.use('/news', noticiaRouter);
-app.use('/blog/news', comentarioRouter);
+app.use('/blog', comentarioRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

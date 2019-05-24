@@ -1,0 +1,91 @@
+<p>
+    <button class="btn btn-primary btnNuevo">Nuevo</button>
+</p>
+
+<div class="card">
+    <div class="card-body">
+        <blockquote class="blockquote mb-0">
+        <h1><%= noticia.titulo %></h1>
+        <p><%= noticia.descripcion %></p>
+        <footer class="blockquote-footer"><%= noticia.categoria  %> - <cite title="Source Title"><%= noticia.fecha %></cite></footer>
+        </blockquote>
+    </div>
+</div> 
+<br>
+<br>
+<br>      
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="myModalLabel">Nuevo</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <input id="id" type="hidden" value="<%= id_noti %>"/>
+                    <div class="form-group row"> 
+                        <label class="col-sm-2 control-label" for="inputComentario">Comentario</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="inputComentario" type="text" placeholder="Comentario"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary btnGuardar">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <% lista.forEach((comentario) => { %>
+        <div class="card">
+            <div class="card-header">
+                <%= comentario.noticia %>
+            </div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p><%= comentario.comentario %></p>
+              </blockquote>
+            </div>
+        </div> 
+        <br>      
+        <% }); %>
+        
+
+<script>
+
+    noticia_id = $('#id').val();
+    // console.log(noticia_id);
+
+    $('.btnNuevo').click( ()=> {        
+        $('#myModal').modal('show');
+        $('#myModalLabel').text('Nuevo')
+    });
+
+    $('.btnGuardar').click( () => {
+        datos = {            
+            comentario : $('#inputComentario').val(),
+            noticia_id : noticia_id
+        };
+       
+        ruta = 'http://localhost:3000/blog/crear';
+    
+        console.log(datos);
+        $.post(ruta , datos, (data) => {
+            $('#inputcomentario').val('');
+            $('#myModal').modal('hide');
+            location.reload();
+            // $('#dataTable').DataTable().ajax.reload();
+        });
+    });
+
+
+</script>

@@ -4,10 +4,6 @@ let Schema = mongoose.Schema;
 
 let modelSchema = new Schema({
 
-    _id: {
-        type: Number,
-        required: true
-    },
     titulo: {
         type: String,
         required: true
@@ -20,23 +16,8 @@ let modelSchema = new Schema({
     fecha: {
         type: String,
         required: true
-    },
-    comentarios: [{
-        autor: {
-            type: String,
-            required: true
-        },
-        mensaje: {
-            type: String,
-            required: true
-        },
-        fecha: {
-            type: String,
-            required: true
-        }
-    }]
+    }
 
 });
 
-let model = mongoose.model('noticias', modelSchema, 'noticias');
-module.exports = model;
+module.exports = mongoose.model('Noticia', modelSchema);

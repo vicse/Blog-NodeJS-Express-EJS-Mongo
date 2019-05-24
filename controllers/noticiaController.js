@@ -23,37 +23,38 @@ module.exports = {
         });
     },
     create: function(req, res) {
+                
+        //para crear un nuevo Id
+        // model.find({}, '_id', { sort: { _id: -1 }, limit: 1 }, (err, data) => {
 
-        model.find({}, '_id', { sort: { _id: -1 }, limit: 1 }, (err, data) => {
+        //     if (err) {
+        //         console.log(err);
+        //         res.sendStatus(500);
+        //     } else {
 
+        //         last_id = parseInt(data[0]._id);
+        //         newId = last_id + 1;
+
+                //console.log(newId); mueestra el nuedo id a crear
+
+        let obj = new model;
+        // obj._id = newId;
+        obj.titulo = req.body.titulo;
+        obj.descripcion = req.body.descripcion;
+        obj.categoria = req.body.categoria;
+        obj.fecha = req.body.fecha;
+        obj.save(function(err, newData) {
             if (err) {
                 console.log(err);
                 res.sendStatus(500);
             } else {
-
-                last_id = parseInt(data[0]._id);
-                newId = last_id + 1;
-
-                //console.log(newId); mueestra el nuedo id a crear
-
-                let obj = new model;
-                obj._id = newId;
-                obj.titulo = req.body.titulo;
-                obj.descripcion = req.body.descripcion;
-                obj.categoria = req.body.categoria;
-                obj.fecha = req.body.fecha;
-                obj.save(function(err, newData) {
-                    if (err) {
-                        console.log(err);
-                        res.sendStatus(500);
-                    } else {
-                        res.json(newData);
-                    }
-                });
-
+                res.json(newData);
             }
-
         });
+
+            // }
+
+        // });
     },
     update: function(req, res) {
         let val_id = req.body.id;

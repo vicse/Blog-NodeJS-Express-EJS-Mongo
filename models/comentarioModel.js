@@ -2,9 +2,18 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
-let modelSchema = new Schema({
-    comentario : { type: String , required: true },
-    noticia_id : { type: Schema.ObjectId , ref: 'noticias' , required: true },
+let comentarioSchema = new Schema({
+
+    comentario : { 
+        type: String
+    },
+
+    noticia : {
+        type: Schema.Types.ObjectId,
+        ref: 'Noticia',
+        required: [true, 'EL id de la noticia es necesario']
+    }
+
 });
-let model = mongoose.model('comentario',modelSchema,'comentario');
-module.exports = model;
+
+module.exports = mongoose.model('Comentario', comentarioSchema);
